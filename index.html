@@ -188,7 +188,7 @@
     <header>
         <h1>Sophia von der Ohe</h1>
         <div class="nav-links">
-            <a href="#map-section">Travel Map</a>
+            <a href="#map-section">Experience Map</a>
             <a href="#research">Research</a>
             <a href="#leadership">Field Leadership</a>
             <a href="#conservation">Conservation</a>
@@ -336,31 +336,83 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        var map = L.map('map').setView([20, -100], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.3.3/oms.min.js"></script>
 
-        var locations = [
-            {n: "Wood Lab & Eelgrass Research", c: [47.6515, -122.3129], u: "wood-lab.html"},
-            {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html"},
-            {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html"},
-            {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html"},
-            {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html"},
-            {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html"},
-            {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html"},
-            {n: "Heal the Bay (Santa Monica)", c: [34.0101, -118.4961], u: "heal-the-bay.html"},
-            {n: "Reef Restoration (Bali)", c: [-8.1481, 114.6540], u: "conservation-dives.html"},
-            {n: "Lionfish Spearfishing (Belize)", c: [16.8219, -88.1065], u: "conservation-dives.html"},
-            {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html"},
-            {n: "Marine Mammal Fdn (San Diego)", c: [32.7231, -117.2346], u: "nmf.html"},
-            {n: "Boreal Toad Recovery (Carbondale)", c: [39.4022, -107.2112], u: "boreal-toad.html"},
-            {n: "Pack Forest Redwoods", c: [46.8427, -122.2893], u: "pack-forest.html"}
-        ];
+<script>
+    // Initialize Map
+    var map = L.map('map').setView([38, -100], 3);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-        locations.forEach(function(l) {
-            L.marker(l.c).addTo(map).bindPopup(`<a href="${l.u}"><b>${l.n}</b><br>View Details</a>`);
+    // Initialize Spiderfier (this fixes the overlapping pins)
+    var oms = new OverlappingMarkerSpiderfier(map, {
+        keepSpiderfied: true,
+        nearbyDistance: 20
+    });
+
+    var locations = [
+        {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html", img: "wood-lab-thumb.jpg"},
+        {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html", img: "eelgrass-thumb.jpg"},
+        {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html", img: "onrc-thumb.jpg"},
+        {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html", img: "rmbl-thumb.jpg"},
+        {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html", img: "sea-thumb.jpg"},
+        {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html", img: "uwild-thumb.jpg"},
+        {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html", img: "peaks-thumb.jpg"},
+        {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html", img: "aquarium-thumb.jpg"},
+        {n: "Heal the Bay (Santa Monica)", c: [34.0101, -118.4961], u: "heal-the-bay.html", img: "htb-thumb.jpg"},
+        {n: "Reef Restoration (Bali)", c: [-8.1481, 114.6540], u: "conservation-dives.html", img: "dives-thumb.jpg"},
+        {n: "Lionfish Spearfishing (Belize)", c: [16.8219, -88.1065], u: "conservation-dives.html", img: "dives-thumb.jpg"},
+        {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html", img: "club-thumb.jpg"},
+        {n: "Marine Mammal Fdn", c: [32.7231, -117.2346], u: "nmf.html", img: "nmf-thumb.jpg"},
+        {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html", img: "boreal-thumb.jpg"},
+        {n: "Pack Forest Redwoods", c: [46.8427, -122.2893], u: "pack-forest.html", img: "pack-forest-thumb.jpg"}
+    ];
+
+    var popup = new L.Popup();
+    oms.addListener('click', function(marker) {
+        popup.setContent(marker.desc);
+        popup.setLatLng(marker.getLatLng());
+        map.openPopup(popup);
+    });
+
+    locations.forEach(function(l) {
+        // Create a custom photo icon
+        var photoIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div style="background-image: url(${l.img});" class="marker-pin"></div>`,
+            iconSize: [40, 40],
+            iconAnchor: [20, 40]
         });
-    </script>
+
+        var marker = L.marker(l.c, { icon: photoIcon });
+        marker.desc = `<div style="text-align:center;">
+                        <b>${l.n}</b><br>
+                        <a href="${l.u}" style="color:var(--teal); font-weight:bold;">View Details</a>
+                      </div>`;
+        
+        map.addLayer(marker);
+        oms.addMarker(marker); // Register with Spiderfier
+    });
+</script>
+
+<style>
+    .marker-pin {
+        width: 40px;
+        height: 40px;
+        border-radius: 50% 50% 50% 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 2px solid white;
+        box-shadow: 0 0 4px rgba(0,0,0,0.3);
+        transform: rotate(-45deg);
+    }
+    /* This makes the image inside stay upright even though the pin is tilted */
+    .marker-pin::after {
+        content: "";
+        /* Add any additional styling if needed */
+    }
+</style>
 </body>
 </html>
