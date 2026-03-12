@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unwelcome Guests | Sophia von der Ohe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&family=Source+Serif+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a3a5f;
+            --teal: #2a9d8f;
+            --light-bg: #f9fbfb;
+            --text-gray: #444;
+        }
+
+        body {
+            font-family: 'Source Serif Pro', serif;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: var(--text-gray);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #a8e6cf;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin: 10px 0; }
+        .subtitle { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 1.2rem; opacity: 0.9; }
+
+        .article-container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 50px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: sticky;
+            top: 50px;
+            height: fit-content;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .sidebar h4 { font-size: 0.7rem; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        .sidebar ul { list-style: none; padding: 0; }
+        .sidebar li { margin-bottom: 12px; }
+        .sidebar a { text-decoration: none; color: #888; font-size: 0.85rem; transition: 0.3s; }
+        .sidebar a:hover { color: var(--navy); padding-left: 5px; }
+
+        /* Main Content */
+        .paper-content h2 { 
+            font-family: 'Playfair Display', serif; 
+            color: var(--navy); 
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-top: 60px;
+        }
+
+        .abstract {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            font-style: italic;
+            border-left: 4px solid var(--teal);
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        /* Hypothesis Box */
+        .hypothesis-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: inset 4px 0 0 var(--teal);
+        }
+        
+        .hypothesis-container h3 {
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--navy);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hypothesis-item { margin-bottom: 15px; }
+        .h-title { display: block; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+        .h-text { font-size: 0.95rem; color: var(--text-gray); line-height: 1.5; }
+
+        /* Figures */
+        .figure-box {
+            background: white;
+            padding: 20px;
+            border: 1px solid #eee;
+            margin: 45px 0;
+            text-align: center;
+        }
+
+        .figure-box img { width: 100%; height: auto; border-radius: 4px; }
+        .caption { 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 0.85rem; 
+            color: #666; 
+            margin-top: 15px; 
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        @media (max-width: 900px) {
+            .article-container { grid-template-columns: 1fr; }
+            .sidebar { display: none; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="wood-lab.html" class="back-link">← Back to Wood Lab</a>
+        <h1>Unwelcome Guests</h1>
+        <div class="subtitle">and Their Even Smaller Guests</div>
+    </header>
+
+    <div class="article-container">
+        <nav class="sidebar">
+            <h4>Sections</h4>
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#hypotheses">Hypotheses</a></li>
+                <li><a href="#methods">Methods</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#discussion">Discussion</a></li>
+            </ul>
+        </nav>
+
+        <main class="paper-content">
+            <div class="abstract">
+                <strong>Project Goal:</strong> To determine whether biological invasions into Puget Sound are associated with long-term changes in native parasite communities at the ecosystem scale[cite: 263].
+            </div>
+
+            <section id="intro">
+                <h2>Introduction</h2>
+                <p>Parasites are integral components of ecological communities, shaping host population dynamics, food-web structure, and biodiversity across trophic levels[cite: 246]. Despite their importance, parasites are frequently overlooked in ecological monitoring, leaving substantial gaps in our understanding of how human-driven disturbances influence parasite diversity and abundance[cite: 247]. Because parasite transmission relies on interactions among hosts, intermediate hosts, and environmental conditions, long-term shifts in parasite communities can serve as sensitive indicators of broader ecosystem change[cite: 248].</p>
+                <p>One major anthropogenic driver capable of restructuring these interactions is the introduction of non-native species[cite: 249]. Biological invasions are widespread in marine and estuarine systems and can substantially alter host community composition, trophic pathways, and disease dynamics[cite: 250]. Several conceptual models predict how invasions may influence parasites in native hosts[cite: 251]. By pairing museum-derived parasitological data with invasion timelines in Puget Sound, it becomes possible to ask whether system-wide parasite abundance or diversity has changed in concert with annual invasion activity[cite: 258, 261].</p>
+            </section>
+
+            <section id="hypotheses">
+                <div class="figure-box">
+                    <img src="hypotheses-thumb.png" alt="Conceptual Model of Pathways">
+                    <div class="caption"><strong>Conceptual Model:</strong> Amplification and reduction pathways resulting from species invasion events [cite: 273-290].</div>
+                </div>
+
+                <div class="hypothesis-container">
+                    <h3>Research Hypotheses</h3>
+                    <div class="hypothesis-item">
+                        <span class="h-title">H1 – Spillover (Diversity Increase)</span>
+                        <span class="h-text">Years with higher invasion counts will show higher parasite diversity in native fish hosts [cite: 266-267].</span>
+                    </div>
+                    <div class="hypothesis-item">
+                        <span class="h-title">H1 alternative – Dilution (Diversity Decrease)</span>
+                        <span class="h-text">Invasion activity will reduce parasite diversity by disrupting native transmission pathways [cite: 268-269].</span>
+                    </div>
+                    <div class="hypothesis-item">
+                        <span class="h-title">H2 – Transmission/Stress (Abundance Increase)</span>
+                        <span class="h-text">Years with more invasions will correspond to higher parasite abundance[cite: 270].</span>
+                    </div>
+                    <div class="hypothesis-item">
+                        <span class="h-title">H2 alternative – Suppression (Abundance Decrease)</span>
+                        <span class="h-text">Parasite abundance will decline during years of elevated invasion activity [cite: 271-272].</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="methods">
+                <h2>Methods</h2>
+                <p>Parasite data were compiled from historical dissections of marine fishes archived in regional museum collections[cite: 293]. Each record included year of collection, host species identity, parasite taxon, and parasite counts per individual host[cite: 294]. Invasion records were obtained from the National Exotic Marine and Estuarine Species Information System (NEMESIS)[cite: 297]. Only species classified as both non-native and established were retained[cite: 298].</p>
+                <p>To align datasets, parasite data were aggregated by year. Mean parasite abundance was calculated as the average number of parasites per host examined, and diversity as the number of distinct taxa observed[cite: 301]. Annual sampling effort was quantified as the number of host records per year[cite: 302]. All data cleaning and modeling were conducted in R (version 4.3) using packages such as <code>tidyverse</code> and <code>MASS</code> [cite: 303-304]. To account for temporal delays, a 3-year lagged invasion variable was also created[cite: 305].</p>
+            </section>
+
+            <section id="results">
+                <h2>Results</h2>
+                <p>Across all non-lagged analyses, there was no statistical evidence that annual marine invasion events predicted either parasite abundance or parasite diversity in native Puget Sound fishes[cite: 325]. Correlation tests revealed weak, non-significant associations for both abundance ($r=0.173$, $p=0.136$) and diversity ($r=0.036$, $p=0.758$)[cite: 326].</p>
+
+                <div class="figure-box">
+                    <img src="figurei1-thumb.png" alt="Figure 1">
+                    <div class="caption"><strong>Figure 1.</strong> Relationship between annual marine invasions and parasite abundance. No significant relationship was detected [cite: 357-362].</div>
+                </div>
+
+                <div class="figure-box">
+                    <img src="figurei2-thumb.png" alt="Figure 2">
+                    <div class="caption"><strong>Figure 2.</strong> Relationship between annual marine invasions and parasite diversity. No significant relationship was detected [cite: 381-386].</div>
+                </div>
+
+                <p>Three-year lagged analyses likewise revealed no delayed effects of invasion activity on native parasite communities[cite: 333]. Lagged negative binomial models reinforced these results, as invasion activity three years prior did not significantly predict parasite abundance or diversity[cite: 336].</p>
+
+                <div class="figure-box">
+                    <img src="figurei3-thumb.png" alt="Figure 3">
+                    <div class="caption"><strong>Figure 3.</strong> Three-year lagged relationship between marine invasion activity and parasite abundance [cite: 403-408].</div>
+                </div>
+
+                <div class="figure-box">
+                    <img src="figurei4-thumb.png" alt="Figure 4">
+                    <div class="caption"><strong>Figure 4.</strong> Three-year lagged relationship between marine invasion activity and parasite diversity [cite: 409-412].</div>
+                </div>
+            </section>
+
+            <section id="discussion">
+                <h2>Discussion</h2>
+                <p>Contrary to predictions, this study found no evidence that marine species invasions predicted parasite abundance or diversity in native Puget Sound fishes[cite: 413]. One possible explanation is that invasive species in this system may not function as effective hosts for native parasites or may contribute negligibly to transmission networks[cite: 417]. The lack of support for spillover or dilution hypotheses suggests substantial ecological buffering within this system[cite: 421]. Marine food webs are complex and characterized by high redundancy, which may stabilize parasite communities even as new species are introduced [cite: 422-423].</p>
+                <p>In conclusion, this study underscores the importance of empirical testing of invasion hypotheses, as invasion effects on disease dynamics appear to be highly system-specific and shaped by ecological context [cite: 449-450].</p>
+            </section>
+        </main>
+    </div>
+
+    <footer style="text-align: center; padding: 60px 20px; color: #999; font-size: 0.8rem; font-family: 'Montserrat';">
+        &copy; 2025 Sophia von der Ohe | University of Washington SAFS
+    </footer>
+
+</body>
+</html>
