@@ -180,6 +180,26 @@
 
         ul { list-style: none; padding: 0; }
         .list-title { font-weight: 700; color: var(--navy); text-transform: uppercase; margin-bottom: 10px; }
+
+.social-ribbon {
+    background: var(--navy); /* This creates the blue strip */
+    padding: 20px 0;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.social-ribbon a {
+    margin: 0 15px;
+    color: white !important; /* Makes text white against the blue */
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.social-ribbon a:hover {
+    color: var(--accent) !important;
+}
     </style>
 </head>
 <body>
@@ -191,7 +211,7 @@
             <a href="#research">Research</a>
             <a href="#leadership">Field Leadership</a>
             <a href="#conservation">Conservation</a>
-            <a href="resume.pdf" target="_blank" style="color: var(--accent); border: 1px solid var(--accent); padding: 5px 10px; border-radius: 4px;">Download CV</a>
+            <a href="Sophia_Resume.pdf" download="Sophia_Resume.pdf" style="color: var(--accent); border: 1px solid var(--accent); padding: 5px 10px; border-radius: 4px; text-decoration: none;">Download Resume</a>
         </div>
     </header>
 
@@ -325,29 +345,32 @@
     </section>
 
     <footer>
-        <div style="text-align:center; margin-bottom:40px;">
-            <a href="https://www.linkedin.com/in/sophia-von-der-ohe" target="_blank" style="margin:10px; color:var(--navy); font-weight:600; text-decoration:none;">LinkedIn</a>
-            <a href="https://www.instagram.com/vonder.voyage" target="_blank" style="margin:10px; color:var(--navy); font-weight:600; text-decoration:none;">Instagram</a>
-            <a href="https://www.facebook.com/sophia.vonderohe.73/" target="_blank" style="margin:10px; color:var(--navy); font-weight:600; text-decoration:none;">Facebook</a>
+    <div class="social-ribbon" style="text-align:center;">
+        <a href="https://www.linkedin.com/in/sophia-von-der-ohe" target="_blank">LinkedIn</a>
+        <a href="https://www.instagram.com/vonder.voyage" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/sophia.vonderohe.73/" target="_blank">Facebook</a>
+    </div>
+
+    <div class="certs-container">
+        <div>
+            <p class="list-title">Certifications</p>
+            <ul>
+                <li>PADI Certified Rescue Diver</li>
+                <li>Wilderness First Responder</li>
+            </ul>
         </div>
-        <div class="certs-container">
-            <div>
-                <p class="list-title">Certifications</p>
-                <ul>
-                    <li>PADI Certified Rescue Diver</li>
-                    <li>Wilderness First Responder</li>
-                </ul>
-            </div>
-            <div>
-                <p class="list-title">Awards & Honors</p>
-                <ul style="font-size: 0.85rem;">
-                    <li>UW Honors Program</li>
-                    <li>UW Dean’s List</li>
-                    <li>AP Scholar with Distinction</li>
-                </ul>
-            </div>
+        <div>
+            <p class="list-title">Awards & Honors</p>
+            <ul style="font-size: 0.85rem;">
+                <li>UW Honors Program</li>
+                <li>UW Purple and Gold Scholarship</li>
+                <li>UW Dean’s List Autumn ’24, ’25 & Winter ’25</li>
+                <li>AP Scholar with Distinction Award</li>
+                <li>CSF Sealbearer</li>
+            </ul>
         </div>
-    </footer>
+    </div>
+</footer>
 
    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
