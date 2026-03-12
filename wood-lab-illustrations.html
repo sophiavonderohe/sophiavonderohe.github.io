@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parasitology Illustrations | Sophia von der Ohe</title>
+    <title>Paints & Parasites | Sophia von der Ohe</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -37,80 +37,101 @@
             font-weight: 600;
         }
 
-        h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.5rem; margin: 0; }
+        h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.8rem; margin: 0; }
         
         .description {
             max-width: 700px;
             margin: 30px auto;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #555;
             padding: 0 20px;
         }
 
-        /* The Gallery Grid */
-        .gallery-grid {
+        /* The Masonry Gallery Layout */
+        .gallery-container {
             max-width: 1200px;
-            margin: 40px auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            margin: 0 auto;
             padding: 20px;
+            column-count: 3; /* Creates the fitted vertical columns */
+            column-gap: 20px;
         }
 
+        @media (max-width: 900px) { .gallery-container { column-count: 2; } }
+        @media (max-width: 600px) { .gallery-container { column-count: 1; } }
+
         .gallery-item {
+            display: inline-block; /* Essential for masonry */
+            width: 100%;
+            margin-bottom: 20px;
             background: white;
             padding: 10px;
             border-radius: 4px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            /* Start slightly tilted for the "hand-drawn" feel */
-            transform: rotate(calc(Math.random() * 2deg - 1deg)); 
+            transform: rotate(-1deg); /* Default tilt */
         }
 
-        /* Hover effect: Straightens and lifts up */
+        .gallery-item:nth-child(even) { transform: rotate(1.5deg); }
+
         .gallery-item:hover {
-            transform: rotate(0deg) translateY(-5px);
+            transform: rotate(0deg) scale(1.02);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            z-index: 10;
         }
 
         .gallery-item img {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 2px;
+            height: auto; /* Fits to the image's natural size */
             display: block;
+            border-radius: 2px;
         }
 
-        /* Lightbox CSS (The Full Screen Overlay) */
+        /* Full Screen Lightbox Styles */
         #lightbox {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 2000;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             justify-content: center;
             align-items: center;
-            cursor: pointer;
         }
 
         #lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border: 5px solid white;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            max-width: 85%;
+            max-height: 85%;
+            border: 8px solid white;
         }
 
-        .close-hint {
+        .nav-btn {
             position: absolute;
-            bottom: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
             color: white;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
+            border: none;
+            padding: 20px;
+            cursor: pointer;
+            font-size: 2rem;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover { background: rgba(255,255,255,0.3); }
+        #prev-btn { left: 10px; }
+        #next-btn { right: 10px; }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -118,38 +139,66 @@
 
     <header>
         <a href="wood-lab.html" class="back-link">← Back to Wood Lab</a>
-        <h1>Parasites & Painted Patterns</h1>
+        <h1>Paints & Parasites</h1>
     </header>
 
     <div class="description">
-        <p>A collection of watercolor and scientific illustrations created for an elementary parasitology learning module. These pieces aim to bridge the gap between complex marine ecology and visual storytelling, making the world of "unwelcome guests" accessible and engaging for young learners.</p>
+        <p>A collection of scientific illustrations created for an elementary parasitology learning module. By combining technical accuracy with watercolor, these pieces aim to inspire curiosity about disease ecology in younger students.</p>
     </div>
 
-    <div class="gallery-grid">
-        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor1-thumb.jpg" alt="Watercolor Illustration 1"></div>
-        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor2-thumb.jpg" alt="Watercolor Illustration 2"></div>
-        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor3-thumb.jpg" alt="Watercolor Illustration 3"></div>
-        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor4-thumb.jpg" alt="Watercolor Illustration 4"></div>
-        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor5-thumb.jpg" alt="Watercolor Illustration 5"></div>
-        <div class="gallery-item" onclick="openLightbox(this)"><img src="parasites-thumb.JPG" alt="Parasite Study"></div>        <div class="gallery-item" onclick="openLightbox(this)"><img src="hosts-thumb.png" alt="Marine Host Illustration"></div>
-        <div class="gallery-item" onclick="openLightbox(this)"><img src="labpeople-thumb.jpg" alt="Lab Activity Drawing"></div>
+    <div class="gallery-container" id="gallery">
+        <div class="gallery-item"><img src="labpeople-thumb.jpg" alt="Lab Activity"></div>
+        <div class="gallery-item"><img src="parasites-thumb.JPG" alt="Parasite Study"></div>
+        <div class="gallery-item"><img src="hosts-thumb.png" alt="Hosts"></div>
+        <div class="gallery-item"><img src="watercolor1-thumb.jpg" alt="Watercolor 1"></div>
+        <div class="gallery-item"><img src="watercolor5-thumb.jpg" alt="Watercolor 5"></div>
+        <div class="gallery-item"><img src="watercolor6-thumb.jpg" alt="Watercolor 6"></div>
+        <div class="gallery-item"><img src="watercolor4-thumb.jpg" alt="Watercolor 4"></div>
+        <div class="gallery-item"><img src="watercolor3-thumb.jpg" alt="Watercolor 3"></div>
+        <div class="gallery-item"><img src="watercolor2-thumb.jpg" alt="Watercolor 2"></div>
     </div>
 
-    <div id="lightbox" onclick="closeLightbox()">
+    <div id="lightbox">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <button class="nav-btn" id="prev-btn" onclick="changeImage(-1)">&#10094;</button>
         <img id="lightbox-img" src="">
-        <div class="close-hint">CLICK ANYWHERE TO CLOSE</div>
+        <button class="nav-btn" id="next-btn" onclick="changeImage(1)">&#10095;</button>
     </div>
 
     <script>
-        function openLightbox(element) {
-            var fullImg = element.querySelector('img').src;
-            document.getElementById('lightbox-img').src = fullImg;
-            document.getElementById('lightbox').style.display = 'flex';
+        let currentIndex = 0;
+        const images = Array.from(document.querySelectorAll('.gallery-item img'));
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        // Add click events to all gallery items
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentIndex = index;
+                showImage();
+            });
+        });
+
+        function showImage() {
+            lightboxImg.src = images[currentIndex].src;
+            lightbox.style.display = 'flex';
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex >= images.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = images.length - 1;
+            showImage();
         }
 
         function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
+            lightbox.style.display = 'none';
         }
+
+        // Close when clicking background (but not the image)
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
     </script>
 
 </body>
