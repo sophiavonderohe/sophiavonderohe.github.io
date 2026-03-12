@@ -19,186 +19,35 @@
             --current-green: #4caf50;
         }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            background-color: var(--light-bg);
-            color: #333;
-            line-height: 1.6;
-        }
+        body { font-family: 'Montserrat', sans-serif; margin: 0; background-color: var(--light-bg); color: #333; line-height: 1.6; }
 
-        header {
-            background: var(--navy);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
+        header { background: var(--navy); color: white; padding: 40px 20px; text-align: center; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin: 0; }
+        .nav-links { margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            margin: 0;
-        }
+        .intro-container { max-width: 1000px; margin: 50px auto; padding: 0 20px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .intro-image img { width: 300px; height: 300px; object-fit: cover; border-radius: 50%; border: 5px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .intro-text { flex: 1; min-width: 300px; }
 
-        .nav-links {
-            margin-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
+        #map-section { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        #map { height: 500px; width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+        section { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
+        h2 { font-family: 'Playfair Display', serif; color: var(--navy); border-bottom: 2px solid var(--accent); display: inline-block; margin-bottom: 30px; }
+        .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
 
-        /* Intro Section */
-        .intro-container {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
+        .item-card { background: white; border-radius: 8px; text-decoration: none; color: inherit; overflow: hidden; border: 1px solid #e0e0e0; transition: 0.3s; position: relative; }
+        .item-card:hover { transform: translateY(-5px); border-color: var(--teal); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .card-img { width: 100%; height: 180px; object-fit: cover; background-color: #eee; }
+        .card-content { padding: 20px; }
+        .card-content h3 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--navy); }
 
-        .intro-image img {
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+        .status-badge { position: absolute; top: 10px; right: 10px; background: white; padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; box-shadow: 0 2px 5px rgba(0,0,0,0.1); z-index: 10; }
+        .status-badge.current { color: var(--current-green); border: 1px solid var(--current-green); }
 
-        .intro-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        /* Map Styling */
-        #map-section {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        #map {
-            height: 500px;
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            background: #cbdde1; /* Water color while loading */
-        }
-
-        /* The Custom Photo Pin */
-        .marker-pin {
-            width: 40px;
-            height: 40px;
-            border-radius: 50% 50% 50% 0;
-            background-color: var(--teal); /* Fallback color */
-            background-size: cover;
-            background-position: center;
-            border: 2px solid white;
-            box-shadow: 0 0 4px rgba(0,0,0,0.3);
-            transform: rotate(-45deg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Grid System */
-        section {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-
-        h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--navy);
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-
-        .item-card {
-            background: white;
-            border-radius: 8px;
-            text-decoration: none;
-            color: inherit;
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .item-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--teal);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background-color: #eee;
-        }
-
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-content h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.1rem;
-            color: var(--navy);
-        }
-
-        .status-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 10;
-        }
-
-        .status-badge.current {
-            color: var(--current-green);
-            border: 1px solid var(--current-green);
-        }
-
-        footer {
-            background: #ededed;
-            padding: 50px 20px;
-            margin-top: 60px;
-        }
-
-        .certs-container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
+        footer { background: #ededed; padding: 50px 20px; margin-top: 60px; }
+        .certs-container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         ul { list-style: none; padding: 0; }
         .list-title { font-weight: 700; color: var(--navy); text-transform: uppercase; margin-bottom: 10px; }
     </style>
@@ -223,7 +72,7 @@
         <div class="intro-text">
             <h2>Hi, I'm Sophia!</h2>
             <p>I am a University of Washington undergraduate student pursuing a double major in <strong>Marine Biology & Environmental Science and Terrestrial Resource Management</strong> with a minor in <strong>Quantitative Science</strong>.</p>
-            <p>My work combines my passion for ecological research with a commitment to outdoor education and leadership. Whether I am in the lab looking for parasites under a dissecting scope or leading students on a sea kayaking trek, I am dedicated to protecting our natural world.</p>
+            <p>My work combines my passion for ecological research with a commitment to outdoor education and leadership.</p>
         </div>
     </section>
 
@@ -232,201 +81,53 @@
         <div id="map"></div>
     </section>
 
-    <section id="research">
-        <h2>Research Experience</h2>
-        <div class="content-grid">
-            <a href="wood-lab.html" class="item-card">
-                <div class="status-badge current">Current</div>
-                <img src="wood-lab-thumb.JPG" class="card-img" alt="Wood Lab">
-                <div class="card-content">
-                    <h3>Wood Lab (UW SAFS)</h3>
-                    <p>Parasite-invasive species research and teaching module development.</p>
-                </div>
-            </a>
-            <a href="onrc.html" class="item-card">
-                <img src="onrc-thumb.jpeg" class="card-img" alt="ONRC">
-                <div class="card-content">
-                    <h3>Olympic Natural Resources Center</h3>
-                    <p>HAB monitoring and marine sample processing in Forks, WA.</p>
-                </div>
-            </a>
-            <a href="rmbl.html" class="item-card">
-                <img src="rmbl-thumb.png" class="card-img" alt="RMBL">
-                <div class="card-content">
-                    <h3>Rocky Mountain Biological Laboratory</h3>
-                    <p>Field research on salamander biofluorescence in Colorado.</p>
-                </div>
-            </a>
-             <a href="eelgrass-hab.html" class="item-card">
-                <div class="status-badge current">Current</div>
-                <img src="eelgrass-thumb.png" class="card-img" alt="Eelgrass">
-                <div class="card-content">
-                    <h3>Eelgrass-HAB Spatial Analysis</h3>
-                    <p>Independent research with Dr. Padilla-Gamiño & Dr. Trainer.</p>
-                </div>
-            </a>
-            <a href="sea-education.html" class="item-card">
-                <img src="sea-thumb.jpeg" class="card-img" alt="SEA">
-                <div class="card-content">
-                    <h3>SEA Education Association</h3>
-                    <p>Oceanographic sampling and biodiversity monitoring at sea.</p>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="leadership">
-        <h2>Field Leadership & Education</h2>
-        <div class="content-grid">
-            <a href="uwild.html" class="item-card">
-                <div class="status-badge current">Current</div>
-                <img src="uwild-thumb.jpeg" class="card-img" alt="UWild">
-                <div class="card-content">
-                    <h3>UWild Adventures</h3>
-                    <p>Wilderness guide for hiking, backpacking, and kayaking.</p>
-                </div>
-            </a>
-            <a href="peaks-professors.html" class="item-card">
-                <div class="status-badge current">Current</div>
-                <img src="peaks-thumb.jpeg" class="card-img" alt="Peaks">
-                <div class="card-content">
-                    <h3>Peaks and Professors</h3>
-                    <p>Organizing educational hikes with UW faculty.</p>
-                </div>
-            </a>
-            <a href="seattle-aquarium.html" class="item-card">
-                <img src="aquarium-thumb.png" class="card-img" alt="Aquarium">
-                <div class="card-content">
-                    <h3>Seattle Aquarium</h3>
-                    <p>Habitat interpretation and conservation education.</p>
-                </div>
-            </a>
-            <a href="heal-the-bay.html" class="item-card">
-                <img src="htb-thumb.jpeg" class="card-img" alt="Heal the Bay">
-                <div class="card-content">
-                    <h3>Heal the Bay</h3>
-                    <p>Aquarist and Public Programs Coordinator.</p>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section id="conservation">
-        <h2>Conservation & Service Projects</h2>
-        <div class="content-grid">
-            <a href="conservation-dives.html" class="item-card">
-                <img src="dives-thumb.png" class="card-img" alt="Dives">
-                <div class="card-content">
-                    <h3>Conservation Dives</h3>
-                    <p>Reef restoration and invasive species removal globally.</p>
-                </div>
-            </a>
-            <a href="nmf.html" class="item-card">
-                <img src="nmf-thumb.jpeg" class="card-img" alt="NMF">
-                <div class="card-content">
-                    <h3>National Marine Mammal Foundation</h3>
-                    <p>Youth Action Council Member.</p>
-                </div>
-            </a>
-            <a href="boreal-toad.html" class="item-card">
-                <img src="boreal-thumb.png" class="card-img" alt="Boreal Toad">
-                <div class="card-content">
-                    <h3>Colorado Parks and Wildlife</h3>
-                    <p>Boreal Toad Recovery Volunteer in Carbondale, CO.</p>
-                </div>
-            </a>
-            <a href="pack-forest.html" class="item-card">
-                <img src="pack-forest-thumb.png" class="card-img" alt="Pack Forest">
-                <div class="card-content">
-                    <h3>Pack Forest, Ettl Lab</h3>
-                    <p>Redwood Reintroduction Project Volunteer.</p>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <footer>
-        <div style="text-align:center; margin-bottom:40px;">
-            <a href="https://www.linkedin.com/in/sophia-von-der-ohe" target="_blank" style="margin:10px; color:var(--navy); font-weight:600; text-decoration:none;">LinkedIn</a>
-            <a href="https://www.instagram.com/vonder.voyage" target="_blank" style="margin:10px; color:var(--navy); font-weight:600; text-decoration:none;">Instagram</a>
-            <a href="https://www.facebook.com/sophia.vonderohe.73/" target="_blank" style="margin:10px; color:var(--navy); font-weight:600; text-decoration:none;">Facebook</a>
-        </div>
-        <div class="certs-container">
-            <div>
-                <p class="list-title">Certifications</p>
-                <ul>
-                    <li>PADI Certified Rescue Diver</li>
-                    <li>Wilderness First Responder</li>
-                </ul>
-            </div>
-            <div>
-                <p class="list-title">Awards & Honors</p>
-                <ul style="font-size: 0.85rem;">
-                    <li>UW Honors Program | Purple and Gold Scholarship</li>
-                    <li>UW Dean’s List (Autumn ’24, ’25 & Winter ‘25)</li>
-                    <li>AP Scholar with Distinction | CSF Sealbearer</li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Initialize Map
-        var map = L.map('map').setView([25, -40], 2);
+        // 1. Initialize Map
+        var map = L.map('map').setView([20, -100], 2);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
+            attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Initialize Spiderfier
+        // 2. Initialize Spiderfier
         var oms = new OverlappingMarkerSpiderfier(map, {
             keepSpiderfied: true,
-            nearbyDistance: 25
+            nearbyDistance: 20
         });
 
-        // Experience Data
+        // 3. Location Data
         var locations = [
-            {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html", img: "wood-lab-thumb.JPG"},
-            {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html", img: "eelgrass-thumb.png"},
-            {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html", img: "onrc-thumb.jpeg"},
-            {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html", img: "rmbl-thumb.png"},
-            {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html", img: "sea-thumb.jpeg"},
-            {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html", img: "uwild-thumb.jpeg"},
-            {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html", img: "peaks-thumb.jpeg"},
-            {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html", img: "aquarium-thumb.png"},
-            {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html", img: "htb-thumb.jpeg"},
-            {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html", img: "dives-thumb.png"},
-            {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html", img: "dives-thumb.png"},
-            {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html", img: "club-thumb.jpeg"},
-            {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html", img: "nmf-thumb.jpeg"},
-            {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html", img: "boreal-thumb.png"},
-            {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html", img: "pack-forest-thumb.png"}
+            {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html"},
+            {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html"},
+            {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html"},
+            {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html"},
+            {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html"},
+            {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html"},
+            {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html"},
+            {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html"},
+            {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html"},
+            {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html"},
+            {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html"},
+            {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html"},
+            {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html"},
+            {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html"},
+            {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html"}
         ];
 
-        var popup = new L.Popup({ offset: [0, -30] });
+        var popup = new L.Popup();
 
-        // Add markers to map
+        // 4. Add markers
         locations.forEach(function(loc) {
-            var photoIcon = L.divIcon({
-                className: 'custom-icon',
-                html: `<div class="marker-pin" style="background-image: url('${loc.img}');"></div>`,
-                iconSize: [40, 40],
-                iconAnchor: [20, 40]
-            });
-
-            var marker = L.marker(loc.c, { icon: photoIcon });
+            // Standard Blue Marker
+            var marker = L.marker(loc.c);
             
-            // Store description for spiderfier click
-            marker.desc = `
-                <div style="text-align:center; font-family:'Montserrat',sans-serif;">
-                    <b style="color:var(--navy);">${loc.n}</b><br>
-                    <a href="${loc.u}" style="color:var(--teal); font-weight:600; text-decoration:none;">View Details</a>
-                </div>`;
+            // Set up the popup content
+            marker.desc = "<b>" + loc.n + "</b><br><a href='" + loc.u + "'>View Project Details</a>";
             
             map.addLayer(marker);
-            oms.addMarker(marker);
+            oms.addMarker(marker); // Let spiderfier handle the overlaps
         });
 
-        // Spiderfier click handler
+        // 5. Handle clicks through Spiderfier
         oms.addListener('click', function(marker) {
             popup.setContent(marker.desc);
             popup.setLatLng(marker.getLatLng());
