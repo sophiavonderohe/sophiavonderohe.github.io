@@ -352,52 +352,68 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.3.3/oms.min.js"></script>
 
-    <script>
-        // THIS LINE IS THE FIX: Wait for everything to load before running
-        window.onload = function() {
-            var map = L.map('map').setView([25, -40], 2);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Initialize the map centered closer to your primary research areas
+        var map = L.map('map').setView([35, -110], 3);
 
-            var oms = new OverlappingMarkerSpiderfier(map, {
-                keepSpiderfied: true,
-                nearbyDistance: 25
-            });
+        // Using a clear tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
 
-            var locations = [
-                {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html"},
-                {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html"},
-                {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html"},
-                {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html"},
-                {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html"},
-                {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html"},
-                {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html"},
-                {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html"},
-                {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html"},
-                {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html"},
-                {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html"},
-                {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html"},
-                {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html"},
-                {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html"},
-                {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html"}
-            ];
+        // 2. Initialize the Overlapping Marker Spiderfier
+        // This is what makes the pins "spread apart" when clicked
+        var oms = new OverlappingMarkerSpiderfier(map, {
+            keepSpiderfied: true,  // Keeps markers spread until you click away
+            nearbyDistance: 20     // Sensitivity for what counts as "overlapping"
+        });
 
-            var popup = new L.Popup({ offset: [0, -32] });
+        var locations = [
+            {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html"},
+            {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html"},
+            {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html"},
+            {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html"},
+            {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html"},
+            {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html"},
+            {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html"},
+            {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html"},
+            {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html"},
+            {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html"},
+            {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html"},
+            {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html"},
+            {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html"},
+            {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html"},
+            {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html"}
+        ];
 
-            locations.forEach(function(loc) {
-                var marker = L.marker(loc.c);
-                marker.desc = '<div style="text-align:center;"><b>' + loc.n + '</b><br><a href="' + loc.u + '">View Details</a></div>';
-                map.addLayer(marker);
-                oms.addMarker(marker);
-            });
+        // 3. Add markers to the map and the Spiderfier
+        locations.forEach(function(loc) {
+            var marker = L.marker(loc.c);
+            
+            // Store the URL and Name inside the marker object for easy access
+            marker.desc = loc.n;
+            marker.destination = loc.u;
 
-            oms.addListener('click', function(marker) {
-                popup.setContent(marker.desc);
-                popup.setLatLng(marker.getLatLng());
-                map.openPopup(popup);
-            });
-        };
-    </script>
+            // Add a simple tooltip that appears on hover
+            marker.bindTooltip(loc.n);
+
+            map.addLayer(marker);
+            oms.addMarker(marker);
+        });
+
+        // 4. Handle the Click logic
+        // If the marker is alone, it navigates immediately.
+        // If it's in a group, the first click spreads them, and the second click navigates.
+        oms.addListener('click', function(marker) {
+            window.location.href = marker.destination;
+        });
+
+        // Optional: Close tooltips when markers spread to keep it clean
+        oms.addListener('spiderfy', function(markers) {
+            map.closePopup();
+        });
+    });
+</script>
 </body>
 </html>
