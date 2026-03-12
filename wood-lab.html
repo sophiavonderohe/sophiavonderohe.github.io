@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wood Lab | Sophia von der Ohe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a3a5f;
+            --teal: #2a9d8f;
+            --light-bg: #f4f7f6;
+            --accent: #a8e6cf;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        h1 { font-family: 'Playfair Display', serif; margin: 0; }
+        
+        .lab-intro {
+            border-left: 4px solid var(--teal);
+            padding-left: 20px;
+            margin-bottom: 40px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .card-content { padding: 20px; }
+        .card-content h3 { margin: 0 0 10px 0; color: var(--navy); }
+        
+        .tag {
+            display: inline-block;
+            background: #e0f2f1;
+            color: var(--teal);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-link">← Back to Experience Map</a>
+        <h1>Wood Lab (UW SAFS)</h1>
+    </header>
+
+    <div class="container">
+        <div class="lab-intro">
+            <h2>Parasite Ecology & Invasive Species</h2>
+            <p>At the Wood Lab within the University of Washington School of Aquatic and Fishery Sciences, my work focuses on the intersection of disease ecology and marine conservation. Currently, I am involved in research regarding parasite-host interactions and the development of educational tools for marine biology.</p>
+        </div>
+
+        <div class="content-grid">
+            <a href="parasite-research.html" class="project-card">
+                <img src="parasite-thumb.jpg" class="card-img" alt="Parasite Research">
+                <div class="card-content">
+                    <span class="tag">RESEARCH</span>
+                    <h3>Invasive Species & Parasitism</h3>
+                    <p>Investigating how invasive species alter local parasite-host dynamics in Puget Sound.</p>
+                </div>
+            </a>
+
+            <a href="teaching-module.html" class="project-card">
+                <img src="module-thumb.jpg" class="card-img" alt="Teaching Module">
+                <div class="card-content">
+                    <span class="tag">EDUCATION</span>
+                    <h3>Teaching Module Development</h3>
+                    <p>Designing interactive modules to teach undergraduate students about aquatic disease ecology.</p>
+                </div>
+            </a>
+
+            <a href="data-analysis.html" class="project-card">
+                <img src="data-thumb.jpg" class="card-img" alt="Data Analysis">
+                <div class="card-content">
+                    <span class="tag">QUANTITATIVE</span>
+                    <h3>Spatial Data Analysis</h3>
+                    <p>Using R to map the distribution of specific marine parasites across varying environmental gradients.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
