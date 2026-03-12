@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parasitology Illustrations | Sophia von der Ohe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a3a5f;
+            --teal: #2a9d8f;
+            --light-bg: #f4f7f6;
+            --accent: #a8e6cf;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: #333;
+        }
+
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        h1 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2.5rem; margin: 0; }
+        
+        .description {
+            max-width: 700px;
+            margin: 30px auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+            padding: 0 20px;
+        }
+
+        /* The Gallery Grid */
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Start slightly tilted for the "hand-drawn" feel */
+            transform: rotate(calc(Math.random() * 2deg - 1deg)); 
+        }
+
+        /* Hover effect: Straightens and lifts up */
+        .gallery-item:hover {
+            transform: rotate(0deg) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 2px;
+            display: block;
+        }
+
+        /* Lightbox CSS (The Full Screen Overlay) */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 5px solid white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .close-hint {
+            position: absolute;
+            bottom: 20px;
+            color: white;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="wood-lab.html" class="back-link">← Back to Wood Lab</a>
+        <h1>Parasites & Painted Patterns</h1>
+    </header>
+
+    <div class="description">
+        <p>A collection of watercolor and scientific illustrations created for an elementary parasitology learning module. These pieces aim to bridge the gap between complex marine ecology and visual storytelling, making the world of "unwelcome guests" accessible and engaging for young learners.</p>
+    </div>
+
+    <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor1-thumb.jpg" alt="Watercolor Illustration 1"></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor2-thumb.jpg" alt="Watercolor Illustration 2"></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor3-thumb.jpg" alt="Watercolor Illustration 3"></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor4-thumb.jpg" alt="Watercolor Illustration 4"></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="watercolor5-thumb.jpg" alt="Watercolor Illustration 5"></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="parasites-thumb.JPG" alt="Parasite Study"></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="hosts-thumb.jpg" alt="Marine Host Illustration"></div>
+        <div class="gallery-item" onclick="openLightbox(this)"><img src="labpeople-thumb.jpg" alt="Lab Activity Drawing"></div>
+    </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="">
+        <div class="close-hint">CLICK ANYWHERE TO CLOSE</div>
+    </div>
+
+    <script>
+        function openLightbox(element) {
+            var fullImg = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = fullImg;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
