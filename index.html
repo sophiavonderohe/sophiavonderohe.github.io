@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sophia von der Ohe | Marine Biology Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.3.3/oms.min.js"></script>
 
     <style>
         :root {
@@ -77,7 +80,7 @@
             min-width: 300px;
         }
 
-        /* Map */
+        /* Map Styling */
         #map-section {
             max-width: 1100px;
             margin: 40px auto;
@@ -89,22 +92,26 @@
             width: 100%;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #cbdde1; /* Water color while loading */
         }
 
-        /* Markers Styling */
+        /* The Custom Photo Pin */
         .marker-pin {
             width: 40px;
             height: 40px;
             border-radius: 50% 50% 50% 0;
+            background-color: var(--teal); /* Fallback color */
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             border: 2px solid white;
             box-shadow: 0 0 4px rgba(0,0,0,0.3);
             transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Grids */
+        /* Grid System */
         section {
             max-width: 1100px;
             margin: 60px auto;
@@ -363,14 +370,20 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.3.3/oms.min.js"></script>
     <script>
-        var map = L.map('map').setView([20, -100], 2);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        // Initialize Map
+        var map = L.map('map').setView([25, -40], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
 
-        var oms = new OverlappingMarkerSpiderfier(map, {keepSpiderfied: true, nearbyDistance: 20});
+        // Initialize Spiderfier
+        var oms = new OverlappingMarkerSpiderfier(map, {
+            keepSpiderfied: true,
+            nearbyDistance: 25
+        });
 
+        // Experience Data
         var locations = [
             {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html", img: "wood-lab-thumb.JPG"},
             {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html", img: "eelgrass-thumb.png"},
@@ -383,31 +396,41 @@
             {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html", img: "htb-thumb.jpeg"},
             {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html", img: "dives-thumb.png"},
             {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html", img: "dives-thumb.png"},
-            {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "club-thumb.jpeg"},
+            {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html", img: "club-thumb.jpeg"},
             {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html", img: "nmf-thumb.jpeg"},
             {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html", img: "boreal-thumb.png"},
             {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html", img: "pack-forest-thumb.png"}
         ];
 
-        var popup = new L.Popup();
-        oms.addListener('click', function(marker) {
-            popup.setContent(marker.desc);
-            popup.setLatLng(marker.getLatLng());
-            map.openPopup(popup);
-        });
+        var popup = new L.Popup({ offset: [0, -30] });
 
-        locations.forEach(function(l) {
+        // Add markers to map
+        locations.forEach(function(loc) {
             var photoIcon = L.divIcon({
-                className: 'custom-div-icon',
-                html: `<div style="background-image: url(${l.img});" class="marker-pin"></div>`,
+                className: 'custom-icon',
+                html: `<div class="marker-pin" style="background-image: url('${loc.img}');"></div>`,
                 iconSize: [40, 40],
                 iconAnchor: [20, 40]
             });
 
-            var marker = L.marker(l.c, { icon: photoIcon });
-            marker.desc = `<div style="text-align:center;"><b>${l.n}</b><br><a href="${l.u}">View Details</a></div>`;
+            var marker = L.marker(loc.c, { icon: photoIcon });
+            
+            // Store description for spiderfier click
+            marker.desc = `
+                <div style="text-align:center; font-family:'Montserrat',sans-serif;">
+                    <b style="color:var(--navy);">${loc.n}</b><br>
+                    <a href="${loc.u}" style="color:var(--teal); font-weight:600; text-decoration:none;">View Details</a>
+                </div>`;
+            
             map.addLayer(marker);
             oms.addMarker(marker);
+        });
+
+        // Spiderfier click handler
+        oms.addListener('click', function(marker) {
+            popup.setContent(marker.desc);
+            popup.setLatLng(marker.getLatLng());
+            map.openPopup(popup);
         });
     </script>
 </body>
