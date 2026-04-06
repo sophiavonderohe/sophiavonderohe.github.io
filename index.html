@@ -200,6 +200,29 @@
 .social-ribbon a:hover {
     color: var(--accent) !important;
 }
+
+        .custom-pin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pin-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--navy);
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: all 0.3s ease; /* This creates the smooth "spread" feeling */
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+/* When the mouse is over the pin's area, it grows and changes color */
+.custom-pin:hover .pin-dot {
+    transform: scale(2.5); 
+    background-color: var(--teal);
+    z-index: 9999;
+}
     </style>
 </head>
 <body>
@@ -361,7 +384,7 @@
         // 1. Initialize the map
         // We use a slight timeout to ensure the CSS has rendered the #map div first
         setTimeout(function() {
-            var map = L.map('map').setView([35, -100], 3);
+            var map = L.map('map').setView([20, 0], 2);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap',
@@ -387,24 +410,24 @@
             ];
 
             locations.forEach(function(loc) {
-                // To solve the overlapping UW pins without Spiderfier:
-                // We add a tiny "jitter" (0.0002) so they are clickable separately
-                var jitterLat = loc.c[0] + (Math.random() - 0.5) * 0.0005;
-                var jitterLng = loc.c[1] + (Math.random() - 0.5) * 0.0005;
+    // 1. Create a custom icon so we can control it with CSS
+    var customIcon = L.divIcon({
+        className: 'custom-pin',
+        html: '<div class="pin-dot"></div>',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+    });
 
-                var marker = L.marker([jitterLat, jitterLng]).addTo(map);
-                
-                // Add a popup so users know which project is which before clicking
-                marker.bindPopup("<b>" + loc.n + "</b><br><small>Click to view project</small>");
+    var marker = L.marker([loc.c[0], loc.c[1]], { icon: customIcon }).addTo(map);
+    
+    marker.bindPopup("<b>" + loc.n + "</b><br><small>Click to view project</small>");
+    
+    marker.on('click', function() {
+        window.location.href = loc.u;
+    });
 
-                // When the marker is clicked, go to the page
-                marker.on('click', function() {
-                    window.location.href = loc.u;
-                });
-
-                // Show the name on hover
-                marker.bindTooltip(loc.n);
-            });
+    marker.bindTooltip(loc.n);
+});
 
             // Force a resize check to make sure the map tiles fill the div
             map.invalidateSize();
