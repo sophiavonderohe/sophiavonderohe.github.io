@@ -223,6 +223,24 @@
     background-color: var(--teal);
     z-index: 9999;
 }
+
+        /* Custom container for the pin so it can animate */
+.pin-container {
+    transition: transform 0.2s ease-out;
+}
+
+/* The actual pin image */
+.pin-icon {
+    width: 25px; 
+    height: 41px;
+    filter: drop-shadow(0px 3px 2px rgba(0,0,0,0.3));
+}
+
+/* When you hover over the marker, it "pops" up and glows */
+.pin-container:hover {
+    transform: scale(1.3) translateY(-5px);
+    z-index: 9999 !important;
+}
     </style>
 </head>
 <body>
@@ -409,16 +427,41 @@
                 {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html"}
             ];
 
-            locations.forEach(function(loc) {
-    // 1. Create a custom icon so we can control it with CSS
+            
+var coordinateRegistry = {};
+
+locations.forEach(function(loc) {
+    var lat = loc.c[0];
+    var lng = loc.c[1];
+    var coordKey = lat.toFixed(4) + ":" + lng.toFixed(4);
+
+    if (coordinateRegistry[coordKey]) {
+        var count = coordinateRegistry[coordKey];
+        var angle = (count / 8) * Math.PI * 2; 
+        var radius = 0.0006; // Adjust this number to spread them further apart
+        
+        lat += Math.cos(angle) * radius;
+        lng += Math.sin(angle) * radius;
+        
+        coordinateRegistry[coordKey]++;
+    } else {
+        coordinateRegistry[coordKey] = 1;
+    }
+
+    var pinHtml = `
+        <div class="pin-container">
+            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png" class="pin-icon">
+        </div>`;
+
     var customIcon = L.divIcon({
-        className: 'custom-pin',
-        html: '<div class="pin-dot"></div>',
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
+        className: 'custom-leaflet-icon', 
+        html: pinHtml,
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34]
     });
 
-    var marker = L.marker([loc.c[0], loc.c[1]], { icon: customIcon }).addTo(map);
+    var marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
     
     marker.bindPopup("<b>" + loc.n + "</b><br><small>Click to view project</small>");
     
@@ -428,12 +471,6 @@
 
     marker.bindTooltip(loc.n);
 });
-
-            // Force a resize check to make sure the map tiles fill the div
-            map.invalidateSize();
-            
-        }, 100); // 100ms delay is a "safety" for GitHub Pages rendering
-    });
 </script>
 </body>
 </html>
