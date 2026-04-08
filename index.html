@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sophia von der Ohe | Marine Biology Portfolio</title>
     <meta name="description" content="Portfolio of Sophia von der Ohe, a Marine Biology and Environmental Science student at the University of Washington focusing on ecological research and field leadership.">
-<meta name="keywords" content="Sophia von der Ohe, Marine Biology, University of Washington, Wood Lab, Environmental Science, Researcher">
-<meta name="author" content="Sophia von der Ohe">
+    <meta name="keywords" content="Sophia von der Ohe, Marine Biology, University of Washington, Wood Lab, Environmental Science, Researcher">
+    <meta name="author" content="Sophia von der Ohe">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -168,97 +168,60 @@
         }
 
         footer {
-            background: #ededed;
-            padding: 50px 20px;
+            background: var(--navy);
+            padding: 60px 20px;
             margin-top: 60px;
+            text-align: center;
         }
 
-        .certs-container {
-            max-width: 900px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        .social-ribbon {
+            padding: 20px 0;
+            width: 100%;
         }
 
-        ul { list-style: none; padding: 0; }
-        .list-title { font-weight: 700; color: var(--navy); text-transform: uppercase; margin-bottom: 10px; }
+        .social-ribbon a {
+            margin: 0 15px;
+            color: white !important;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
 
-.social-ribbon {
-    background: var(--navy); /* This creates the blue strip */
-    padding: 20px 0;
-    margin-bottom: 40px;
-    width: 100%;
-}
+        .social-ribbon a:hover {
+            color: var(--accent) !important;
+        }
 
-.social-ribbon a {
-    margin: 0 15px;
-    color: white !important; /* Makes text white against the blue */
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
+        /* Map Pin Animations */
+        .pin-container {
+            transition: transform 0.2s ease-out;
+        }
 
-.social-ribbon a:hover {
-    color: var(--accent) !important;
-}
+        .pin-icon {
+            width: 25px; 
+            height: 41px;
+            filter: drop-shadow(0px 3px 2px rgba(0,0,0,0.3));
+        }
 
-        .custom-pin {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pin-dot {
-    width: 10px;
-    height: 10px;
-    background-color: var(--navy);
-    border: 2px solid white;
-    border-radius: 50%;
-    transition: all 0.3s ease; /* This creates the smooth "spread" feeling */
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
-}
-
-/* When the mouse is over the pin's area, it grows and changes color */
-.custom-pin:hover .pin-dot {
-    transform: scale(2.5); 
-    background-color: var(--teal);
-    z-index: 9999;
-}
-
-        /* Custom container for the pin so it can animate */
-.pin-container {
-    transition: transform 0.2s ease-out;
-}
-
-/* The actual pin image */
-.pin-icon {
-    width: 25px; 
-    height: 41px;
-    filter: drop-shadow(0px 3px 2px rgba(0,0,0,0.3));
-}
-
-/* When you hover over the marker, it "pops" up and glows */
-.pin-container:hover {
-    transform: scale(1.3) translateY(-5px);
-    z-index: 9999 !important;
-}
+        .pin-container:hover {
+            transform: scale(1.3) translateY(-5px);
+            z-index: 9999 !important;
+        }
     </style>
 </head>
 <body>
 
     <header>
-    <h1>Sophia von der Ohe</h1>
-    <div class="nav-links">
-        <a href="#map-section">Experience Map</a>
-        <a href="#research">Research</a>
-        <a href="#leadership">Field Leadership</a>
-        <a href="#conservation">Conservation</a>
-        <a href="mailto:sgvdo@uw.edu" style="color: var(--accent); border: 1px solid var(--accent); padding: 5px 10px; border-radius: 4px; text-decoration: none;">Contact</a> 
-        <a href="vonderOhe_Sophia_Resume.pdf" target="_blank" style="color: var(--accent); border: 1px solid var(--accent); padding: 5px 10px; border-radius: 4px; text-decoration: none;">View Resume</a>
-    </div>
-</header>
+        <h1>Sophia von der Ohe</h1>
+        <div class="nav-links">
+            <a href="#map-section">Experience Map</a>
+            <a href="#research">Research</a>
+            <a href="#leadership">Field Leadership</a>
+            <a href="#conservation">Conservation</a>
+            <a href="mailto:sgvdo@uw.edu" style="color: var(--accent); border: 1px solid var(--accent); padding: 5px 10px; border-radius: 4px; text-decoration: none;">Contact</a> 
+            <a href="vonderOhe_Sophia_Resume.pdf" target="_blank" style="color: var(--accent); border: 1px solid var(--accent); padding: 5px 10px; border-radius: 4px; text-decoration: none;">View Resume</a>
+        </div>
+    </header>
 
     <section class="intro-container">
         <div class="intro-image">
@@ -389,91 +352,96 @@
         </div>
     </section>
 
-  <footer style="background: var(--navy); padding: 60px 20px; margin-top: 60px; text-align: center;">
-    <div class="social-ribbon">
-        <a href="mailto:sgvdo@uw.edu" style="color: var(--accent); text-decoration: none; font-weight: 600;">sgvdo@uw.edu</a>
-        <a href="https://www.linkedin.com/in/sophia-von-der-ohe" target="_blank">LinkedIn</a>
-        <a href="https://www.instagram.com/vonder.voyage" target="_blank">Instagram</a>
-        <a href="https://www.facebook.com/sophia.vonderohe.73/" target="_blank">Facebook</a>
-    </div>
-</footer>
+    <footer>
+        <div class="social-ribbon">
+            <a href="mailto:sgvdo@uw.edu">sgvdo@uw.edu</a>
+            <a href="https://www.linkedin.com/in/sophia-von-der-ohe" target="_blank">LinkedIn</a>
+            <a href="https://www.instagram.com/vonder.voyage" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/sophia.vonderohe.73/" target="_blank">Facebook</a>
+        </div>
+    </footer>
 
-   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // 1. Initialize the map
-        // We use a slight timeout to ensure the CSS has rendered the #map div first
-        setTimeout(function() {
-            var map = L.map('map').setView([20, 0], 2);
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slight delay to ensure the DOM and CSS are fully parsed
+            setTimeout(function() {
+                var map = L.map('map').setView([30, -40], 3);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap',
-                maxZoom: 18
-            }).addTo(map);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap',
+                    maxZoom: 18
+                }).addTo(map);
 
-            var locations = [
-                {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html"},
-                {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html"},
-                {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html"},
-                {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html"},
-                {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html"},
-                {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html"},
-                {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html"},
-                {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html"},
-                {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html"},
-                {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html"},
-                {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html"},
-                {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html"},
-                {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html"},
-                {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html"},
-                {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html"}
-            ];
+                var locations = [
+                    {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html"},
+                    {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html"},
+                    {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html"},
+                    {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html"},
+                    {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html"},
+                    {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html"},
+                    {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html"},
+                    {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html"},
+                    {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html"},
+                    {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html"},
+                    {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html"},
+                    {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html"},
+                    {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html"},
+                    {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html"},
+                    {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html"}
+                ];
 
-            
-var coordinateRegistry = {};
+                var coordinateRegistry = {};
 
-locations.forEach(function(loc) {
-    var lat = loc.c[0];
-    var lng = loc.c[1];
-    var coordKey = lat.toFixed(4) + ":" + lng.toFixed(4);
+                locations.forEach(function(loc) {
+                    var lat = loc.c[0];
+                    var lng = loc.c[1];
+                    // Using 3 decimals to group very close pins
+                    var coordKey = lat.toFixed(3) + ":" + lng.toFixed(3);
 
-    if (coordinateRegistry[coordKey]) {
-        var count = coordinateRegistry[coordKey];
-        var angle = (count / 8) * Math.PI * 2; 
-        var radius = 0.0006; // Adjust this number to spread them further apart
-        
-        lat += Math.cos(angle) * radius;
-        lng += Math.sin(angle) * radius;
-        
-        coordinateRegistry[coordKey]++;
-    } else {
-        coordinateRegistry[coordKey] = 1;
-    }
+                    if (coordinateRegistry[coordKey]) {
+                        var count = coordinateRegistry[coordKey];
+                        var angle = (count / 6) * Math.PI * 2; 
+                        var radius = 0.003; // Spreads overlapping pins visibly
+                        
+                        lat += Math.cos(angle) * radius;
+                        lng += Math.sin(angle) * radius;
+                        
+                        coordinateRegistry[coordKey]++;
+                    } else {
+                        coordinateRegistry[coordKey] = 1;
+                    }
 
-    var pinHtml = `
-        <div class="pin-container">
-            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png" class="pin-icon">
-        </div>`;
+                    var pinHtml = `
+                        <div class="pin-container">
+                            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png" class="pin-icon">
+                        </div>`;
 
-    var customIcon = L.divIcon({
-        className: 'custom-leaflet-icon', 
-        html: pinHtml,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34]
-    });
+                    var customIcon = L.divIcon({
+                        className: 'custom-leaflet-icon', 
+                        html: pinHtml,
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34]
+                    });
 
-    var marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
-    
-    marker.bindPopup("<b>" + loc.n + "</b><br><small>Click to view project</small>");
-    
-    marker.on('click', function() {
-        window.location.href = loc.u;
-    });
+                    var marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+                    
+                    marker.bindPopup("<b>" + loc.n + "</b><br><small>Click to view project</small>");
+                    
+                    marker.on('click', function() {
+                        window.location.href = loc.u;
+                    });
 
-    marker.bindTooltip(loc.n);
-});
-</script>
+                    marker.bindTooltip(loc.n);
+                });
+
+                // Final fix for the 'grey blob' issue - forces map to recalculate size
+                map.invalidateSize();
+
+            }, 500);
+        });
+    </script>
 </body>
 </html>
