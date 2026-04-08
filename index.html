@@ -363,85 +363,87 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Slight delay to ensure the DOM and CSS are fully parsed
-            setTimeout(function() {
-                var map = L.map('map').setView([30, -40], 3);
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            // 1. Initial view set to Seattle/UW instead of the whole world
+            var map = L.map('map').setView([47.65, -122.31], 12);
 
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap',
-                    maxZoom: 18
-                }).addTo(map);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap',
+                maxZoom: 18
+            }).addTo(map);
 
-                var locations = [
-                    {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html"},
-                    {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html"},
-                    {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html"},
-                    {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html"},
-                    {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html"},
-                    {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html"},
-                    {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html"},
-                    {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html"},
-                    {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html"},
-                    {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html"},
-                    {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html"},
-                    {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html"},
-                    {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html"},
-                    {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html"},
-                    {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html"}
-                ];
+            var locations = [
+                {n: "Wood Lab", c: [47.6515, -122.3129], u: "wood-lab.html"},
+                {n: "Eelgrass Research", c: [47.6515, -122.3129], u: "eelgrass-hab.html"},
+                {n: "ONRC Forks", c: [47.9423, -124.3854], u: "onrc.html"},
+                {n: "RMBL Colorado", c: [38.9586, -106.9878], u: "rmbl.html"},
+                {n: "SEA Woods Hole", c: [41.5265, -70.6731], u: "sea-education.html"},
+                {n: "UWild Adventures", c: [47.6503, -122.3038], u: "uwild.html"},
+                {n: "Peaks & Professors", c: [47.6548, -122.3078], u: "peaks-professors.html"},
+                {n: "Seattle Aquarium", c: [47.6075, -122.3431], u: "seattle-aquarium.html"},
+                {n: "Heal the Bay (SM)", c: [34.0101, -118.4961], u: "heal-the-bay.html"},
+                {n: "Bali Reef Restoration", c: [-8.1481, 114.6540], u: "conservation-dives.html"},
+                {n: "Belize Lionfish Spearing", c: [16.8219, -88.1065], u: "conservation-dives.html"},
+                {n: "Heal the Bay Club", c: [34.0483, -118.5204], u: "hb-club.html"},
+                {n: "NMF San Diego", c: [32.7231, -117.2346], u: "nmf.html"},
+                {n: "Boreal Toad Recovery", c: [39.4022, -107.2112], u: "boreal-toad.html"},
+                {n: "Pack Forest", c: [46.8427, -122.2893], u: "pack-forest.html"}
+            ];
 
-                var coordinateRegistry = {};
+            var coordinateRegistry = {};
 
-                locations.forEach(function(loc) {
-                    var lat = loc.c[0];
-                    var lng = loc.c[1];
-                    // Using 3 decimals to group very close pins
-                    var coordKey = lat.toFixed(3) + ":" + lng.toFixed(3);
+            locations.forEach(function(loc) {
+                var lat = loc.c[0];
+                var lng = loc.c[1];
+                
+                // 2. Rounding to 2 decimals makes the "cluster detection" much stronger
+                var coordKey = lat.toFixed(2) + ":" + lng.toFixed(2);
 
-                    if (coordinateRegistry[coordKey]) {
-                        var count = coordinateRegistry[coordKey];
-                        var angle = (count / 6) * Math.PI * 2; 
-                        var radius = 0.003; // Spreads overlapping pins visibly
-                        
-                        lat += Math.cos(angle) * radius;
-                        lng += Math.sin(angle) * radius;
-                        
-                        coordinateRegistry[coordKey]++;
-                    } else {
-                        coordinateRegistry[coordKey] = 1;
-                    }
-
-                    var pinHtml = `
-                        <div class="pin-container">
-                            <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png" class="pin-icon">
-                        </div>`;
-
-                    var customIcon = L.divIcon({
-                        className: 'custom-leaflet-icon', 
-                        html: pinHtml,
-                        iconSize: [25, 41],
-                        iconAnchor: [12, 41],
-                        popupAnchor: [1, -34]
-                    });
-
-                    var marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+                if (coordinateRegistry[coordKey]) {
+                    var count = coordinateRegistry[coordKey];
+                    // 3. Stronger spiral math to force them away from each other
+                    var angle = count * 0.8; 
+                    var radius = 0.005 * count; 
                     
-                    marker.bindPopup("<b>" + loc.n + "</b><br><small>Click to view project</small>");
+                    lat += Math.cos(angle) * radius;
+                    lng += Math.sin(angle) * radius;
                     
-                    marker.on('click', function() {
-                        window.location.href = loc.u;
-                    });
+                    coordinateRegistry[coordKey]++;
+                } else {
+                    coordinateRegistry[coordKey] = 1;
+                }
 
-                    marker.bindTooltip(loc.n);
+                var pinHtml = `
+                    <div class="pin-container">
+                        <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png" class="pin-icon">
+                    </div>`;
+
+                var customIcon = L.divIcon({
+                    className: 'custom-leaflet-icon', 
+                    html: pinHtml,
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34]
                 });
 
-                // Final fix for the 'grey blob' issue - forces map to recalculate size
-                map.invalidateSize();
+                var marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+                
+                marker.bindPopup("<b>" + loc.n + "</b><br><small>Click to view project</small>");
+                
+                marker.on('click', function() {
+                    window.location.href = loc.u;
+                });
 
-            }, 500);
-        });
-    </script>
+                marker.bindTooltip(loc.n);
+            });
+
+            // Final push to render
+            map.invalidateSize();
+
+        }, 500);
+    });
+</script>
 </body>
 </html>
