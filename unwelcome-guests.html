@@ -52,7 +52,6 @@
             gap: 50px;
         }
 
-        /* Sidebar Navigation */
         .sidebar {
             position: sticky;
             top: 50px;
@@ -132,6 +131,35 @@
             .sidebar { display: none; }
             h1 { font-size: 2.2rem; }
         }
+
+        /* Styling for the References Section */
+.references-section {
+    margin-top: 80px;
+    border-top: 1px solid #ddd;
+    padding-top: 40px;
+}
+
+.ref-list {
+    margin-top: 20px;
+}
+
+.ref-item {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    padding-left: 25px; /* Space for the indent */
+    text-indent: -25px; /* Pulls the first line back to the left */
+}
+
+.ref-item a {
+    color: var(--teal);
+    text-decoration: none;
+}
+
+.ref-item a:hover {
+    text-decoration: underline;
+}
     </style>
 </head>
 <body>
@@ -143,16 +171,17 @@
     </header>
 
     <div class="article-container">
-        <nav class="sidebar">
-            <h4>Sections</h4>
-            <ul>
-                <li><a href="#intro">Introduction</a></li>
-                <li><a href="#hypotheses">Hypotheses</a></li>
-                <li><a href="#methods">Methods</a></li>
-                <li><a href="#results">Results</a></li>
-                <li><a href="#discussion">Discussion</a></li>
-            </ul>
-        </nav>
+       <nav class="sidebar">
+    <h4>Sections</h4>
+    <ul>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#hypotheses">Hypotheses</a></li>
+        <li><a href="#methods">Methods</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#discussion">Discussion</a></li>
+        <li><a href="#references">References</a></li>
+    </ul>
+</nav>
 
         <main class="paper-content">
             <div class="abstract">
